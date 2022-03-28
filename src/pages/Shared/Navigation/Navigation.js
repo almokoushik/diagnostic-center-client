@@ -1,76 +1,3 @@
-// import React from 'react';
-// import AppBar from '@mui/material/AppBar';
-// import Box from '@mui/material/Box';
-// import Toolbar from '@mui/material/Toolbar';
-// import Typography from '@mui/material/Typography';
-// import Button from '@mui/material/Button';
-// import IconButton from '@mui/material/IconButton';
-// import MenuIcon from '@mui/icons-material/Menu';
-// import { Link } from 'react-router-dom';
-// import useAuth from '../../../hooks/useAuth';
-
-// const Navigation = () => {
-//   const {user,loginUser,
-//     logoutUser,loading}=useAuth()
-
-//   const navButton={
-//     textDecoration:"none",
-//     color:"white"
-//   }
-//   const handleLogout=()=>{
-//     logoutUser()
-//   }
-//   // const handleLogin=()=>{
-//   //   loginUser()
-//   // }
-
-// const [mobileOpen, setMobileOpen] = React.useState(false);
-
-// const handleDrawerToggle = () => {
-//   setMobileOpen(!mobileOpen);
-// };
-
-//     return (
-//         <Box sx={{ flexGrow: 1 }}>
-//       <AppBar position="static">
-//         <Toolbar>
-//           <IconButton
-//             size="large"
-//             edge="start"
-//             color="inherit"
-//             aria-label="menu"
-//             sx={{ mr: 2 }}
-//           >
-//             <MenuIcon />
-//           </IconButton>
-//           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-//            Doctors Portal
-//           </Typography>
-//           <Link to="/home"   style={navButton}> <Button color="inherit">Home</Button></Link>
-
-//           <Link to="/appointment"   style={navButton}> <Button color="inherit">Appointment</Button></Link>
-
-
-
-//         {user?.email?  <>
-//           <Link to="/dashboard"   style={navButton}> <Button color="inherit">Dashboard</Button></Link>
-//         <Link to="/" onClick={handleLogout}  style={navButton}> <Button color="inherit">Logout</Button></Link>
-//         </>: 
-
-//         <Link to="/login"style={navButton}> <Button color="inherit">Login</Button></Link>}
-//         </Toolbar>
-
-//       </AppBar>
-//     </Box>
-//     );
-// };
-
-// export default Navigation;
-
-
-
-
-
 import * as React from 'react';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
@@ -89,19 +16,28 @@ import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import useAuth from '../../../hooks/useAuth';
 import Button from '@mui/material/Button';
-import { Link } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 import { Avatar, Menu, MenuItem, Tooltip } from '@mui/material';
-import AccountCircle from '@mui/icons-material/AccountCircle';
+
 import avaPic from "../../../images/2.jpg"
-import Badge from '@mui/material/Badge';
-import NotificationsIcon from '@mui/icons-material/Notifications';
+
+
+
+
+import HomeIcon from '@mui/icons-material/Home';
+import InfoIcon from '@mui/icons-material/Info';
+import MiscellaneousServicesIcon from '@mui/icons-material/MiscellaneousServices';
+import PreviewIcon from '@mui/icons-material/Preview';
+import AssignmentIcon from '@mui/icons-material/Assignment';
+import PermContactCalendarIcon from '@mui/icons-material/PermContactCalendar';
+import MedicationIcon from '@mui/icons-material/Medication';
+import ManageAccountsIcon from '@mui/icons-material/ManageAccounts';
+import GridViewIcon from '@mui/icons-material/GridView';
+import LogoutIcon from '@mui/icons-material/Logout';
+import LockOpenIcon from '@mui/icons-material/LockOpen';
 
 
 const drawerWidth = 240;
-
-const pages = ['Products', 'Pricing', 'Blog'];
-const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
-
 
 export default function Navigation(props: Props) {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
@@ -129,14 +65,11 @@ export default function Navigation(props: Props) {
     textDecoration: "none",
     color: "white"
   }
-  const handleLogout = () => {
-    logoutUser()
+  const handleLogout = (e) => {
+    e.preventDefault();
+    handleCloseUserMenu();
+    logoutUser();
   }
-  // const handleLogin=()=>{
-  //   loginUser()
-  // }
-
-
 
   const { window } = props;
   const [mobileOpen, setMobileOpen] = React.useState(false);
@@ -145,30 +78,101 @@ export default function Navigation(props: Props) {
     setMobileOpen(!mobileOpen);
   };
 
+
+  const menuItems = [
+    {
+      name: "Home",
+      path: "/",
+      icon:<HomeIcon></HomeIcon>},
+    {
+      name: "About",
+      path: "/about",
+      icon:<InfoIcon></InfoIcon>},
+    {
+      name: "Services",
+      path: "/services",
+      icon:<MiscellaneousServicesIcon></MiscellaneousServicesIcon>},
+    {
+      name: "Reviews",
+      path: "/review",
+      icon:<PreviewIcon></PreviewIcon>},
+    {
+      name: "Blog",
+      path: "/blog",
+      icon:<AssignmentIcon></AssignmentIcon>},
+    {
+      name: "Contact Us",
+      path: "/contact",
+      icon:<PermContactCalendarIcon></PermContactCalendarIcon>},
+    {
+      name: "Appointment",
+      path: "/appointment",
+      icon:<MedicationIcon></MedicationIcon>}]
+
+
+  const menuItemLoggedIn = [
+    {
+      name: "Profile",
+      path: "/profile",
+      icon:<ManageAccountsIcon></ManageAccountsIcon>},
+    {
+      name: "Dashboard",
+      path: "/dashboard",
+      icon:<GridViewIcon></GridViewIcon>},
+    {
+      name: "Logout",
+      path: "/",
+      icon:< LogoutIcon></LogoutIcon>},
+  ]
+
+
   const drawer = (
     <div>
-      <Toolbar />
+       {/* <Toolbar /> */}
+      <Typography variant="h5" gutterBottom  sx={{pl:2,pt:5}}>
+        Diagnostic Center
+      </Typography>
+      {/* <Toolbar /> */}
+     
       <Divider />
-      <List>
-        {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
-          <ListItem button key={text}>
-            <ListItemIcon>
-              {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-            </ListItemIcon>
-            <ListItemText primary={text} />
-          </ListItem>
+
+      <List >
+        {menuItems.map((text, index) => (
+         
+          <Link  key={index} to={`${text.path}`}style={{display:"flex",justifyContent:"start" , margin:"10px",textDecoration:"none" ,color:"black", fontSize:"40px",alignItems:"center"}} >
+        
+              {text.icon}
+         
+            <ListItemText sx={{ml:5}} primary={text.name} />
+          </Link>
+         
         ))}
       </List>
       <Divider />
+
+
       <List>
-        {['All mail', 'Trash', 'Spam'].map((text, index) => (
-          <ListItem button key={text}>
-            <ListItemIcon>
-              {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-            </ListItemIcon>
-            <ListItemText primary={text} />
-          </ListItem>
-        ))}
+        {
+        user.email?
+        (
+        
+        menuItemLoggedIn.map((text, index) => (
+          <NavLink  style={{display:"flex",justifyContent:"start" , margin:"10px",fontSize:"40px",textDecoration:"none" ,color:"black",alignItems:"center"}} onClick={text.name==="Logout"&& handleLogout} button key={index} to={`${text.path}`}>
+           
+              {text.icon}
+            
+            <ListItemText sx={{ml:5}} primary={text.name} />
+          </NavLink>
+        ))):
+
+        <Link button  to={"/login"}style={{display:"flex",fontSize:"40px",justifyContent:"center" ,margin:"10px",textDecoration:"none" ,color:"black",alignItems:"center"}} >
+        
+        <LockOpenIcon></LockOpenIcon>
+   
+      <ListItemText sx={{ml:5}} primary={"Login"} />
+    </Link>
+        
+        }
       </List>
     </div>
   );
@@ -176,16 +180,18 @@ export default function Navigation(props: Props) {
   const container = window !== undefined ? () => window().document.body : undefined;
 
   return (
-    <Box sx={{ display: 'flex' }}>
+    <Box sx={{ display: 'flex' }} >
       <CssBaseline />
       <AppBar
         position="fixed"
         sx={{
           width: "100%",
 
-        }}
+
+        }} s
+
       >
-        <Toolbar>
+        <Toolbar >
           <IconButton
             color="inherit"
             aria-label="open drawer"
@@ -207,72 +213,55 @@ export default function Navigation(props: Props) {
 
             <Link to="/home" style={navButton}> <Button color="inherit">Home</Button></Link>
 
-            <Link to="/home" style={navButton}> <Button color="inherit">About</Button></Link>
+            <Link to="/about" style={navButton}> <Button color="inherit">About</Button></Link>
 
-            <Link to="/home" style={navButton}> <Button color="inherit">Services</Button></Link>
+            <Link to="/services" style={navButton}> <Button color="inherit">Services</Button></Link>
 
-            <Link to="/home" style={navButton}> <Button color="inherit">Reviews</Button></Link>
+            <Link to="/review" style={navButton}> <Button color="inherit">Reviews</Button></Link>
 
-            <Link to="/home" style={navButton}> <Button color="inherit">Blog</Button></Link>
+            <Link to="/blog" style={navButton}> <Button color="inherit">Blog</Button></Link>
 
-            <Link to="/home" style={navButton}> <Button color="inherit">Contact Us</Button></Link>
+            <Link to="/contact" style={navButton}> <Button color="inherit">Contact Us</Button></Link>
 
             <Link to="/appointment" style={navButton}> <Button color="inherit">Appointment</Button></Link>
 
             {user?.email ? <>
+              <Tooltip title="Open settings">
+                <IconButton
+                  color="inherit"
+                  onClick={handleOpenUserMenu} sx={{ p: 0, mx: 3, overflow: "hidden" }}>
+                  <Avatar style={{ fontSize: "24px" }} alt="Remy Sharp" src={avaPic} />
+                </IconButton>
+              </Tooltip>
+              <Menu
+                sx={{ mt: '45px' }}
+                id="menu-appbar"
+                anchorEl={anchorElUser}
+                anchorOrigin={{
+                  vertical: 'top',
+                  horizontal: 'right',
+                }}
+                keepMounted
+                transformOrigin={{
+                  vertical: 'top',
+                  horizontal: 'right',
+                }}
+                open={Boolean(anchorElUser)}
+                onClose={handleCloseUserMenu}
+              >
+                <Box sx={{ width: "350px" }}>
+                  <Link to="/profile" style={navButton} > <MenuItem sx={{ color: "black", fontWeight: "450" }} onClick={handleCloseUserMenu}>Profile</MenuItem></Link>
 
+                  <Link to="/dashboard" style={navButton} > <MenuItem sx={{ color: "black", fontWeight: "450" }} onClick={handleCloseUserMenu}>Dashboard</MenuItem></Link>
 
-              <Link to="/dashboard" style={navButton}> <Button color="inherit">Dashboard</Button></Link>
-              
-              <Link to="/" onClick={handleLogout} style={navButton}> <Button color="inherit">Logout</Button></Link>
+                  <Link to="/" style={navButton}>
+                    <MenuItem sx={{ color: "black", fontWeight: "450" }} onClick={handleLogout}>Logout</MenuItem>
 
+                  </Link>
 
-              <IconButton size="large" aria-label="show 4 new mails" color="inherit">
-              <Badge badgeContent={4} color="error">
-                <MailIcon />
-              </Badge>
-            </IconButton>
-            <IconButton
-              size="large"
-              aria-label="show 17 new notifications"
-              color="inherit"
-            >
-              <Badge badgeContent={17} color="error">
-                <NotificationsIcon />
-              </Badge>
-            </IconButton>
+                </Box>
 
-              <>
-                <Tooltip title="Open settings">
-                  <IconButton
-                    color="inherit"
-                    onClick={handleOpenUserMenu} sx={{ p: 0, mx: 3 }}>
-                    <Avatar style={{ fontSize: "24px" }} alt="Remy Sharp" src={avaPic} />
-                  </IconButton>
-                </Tooltip>
-                <Menu
-                  sx={{ mt: '45px' }}
-                  id="menu-appbar"
-                  anchorEl={anchorElUser}
-                  anchorOrigin={{
-                    vertical: 'top',
-                    horizontal: 'right',
-                  }}
-                  keepMounted
-                  transformOrigin={{
-                    vertical: 'top',
-                    horizontal: 'right',
-                  }}
-                  open={Boolean(anchorElUser)}
-                  onClose={handleCloseUserMenu}
-                >
-                  {settings.map((setting) => (
-                    <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                      <Typography textAlign="center">{setting}</Typography>
-                    </MenuItem>
-                  ))}
-                </Menu>
-              </>
+              </Menu>
 
             </> :
 
@@ -285,7 +274,7 @@ export default function Navigation(props: Props) {
         sx={{ width: { sm: drawerWidth }, flexShrink: { sm: 0 } }}
         aria-label="mailbox folders"
       >
-        {/* The implementation can be swapped with js to avoid SEO duplication of links. */}
+
         <Drawer
           container={container}
           variant="temporary"
@@ -301,6 +290,8 @@ export default function Navigation(props: Props) {
         >
           {drawer}
         </Drawer>
+
+
         <Drawer
           variant="temporary"
           sx={{
@@ -311,6 +302,8 @@ export default function Navigation(props: Props) {
         >
           {drawer}
         </Drawer>
+
+
       </Box>
       <Box
         component="main"
