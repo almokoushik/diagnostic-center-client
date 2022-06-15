@@ -4,7 +4,8 @@ import Footer from "../Shared/Footer/Footer"
 
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
-import loginImage from "../../images/login.png"
+// import loginImage from "../../images/login.png"
+import loginImage from "../../images/img_vid/login.gif"
 import TextField from '@mui/material/TextField';
 import { Button, Container } from '@mui/material';
 import { Link, NavLink, useLocation, useNavigate } from 'react-router-dom';
@@ -60,6 +61,7 @@ const Login = () => {
             e.target[1].value = ""
             await loginUser(formData.email, formData.password, () => {
                 navigate(state.path || "/", { replace: true });
+               
             });
         }
         else {
@@ -104,9 +106,10 @@ const Login = () => {
 
     return (
         <div>
+            {/* sx={{border:"1px solid red",width:"90%",m:"auto auto"}}  */}
             <Navigation></Navigation>
-            <Container sx={{ flexGrow: 1, my: 5 }}>
-                <Grid container spacing={2} columns={{ xs: 4, sm: 8, md: 8 }}>
+            <Container sx={{ flexGrow: 1, mt: 5,mb:3}} >
+                <Grid container spacing={0} rowSpacing={5} columns={{ xs: 4, sm: 8, md: 8 }} sx={{ display: "flex", justifyContent: "flex-start", alignItems: "center" }}>
                     <Grid item xs={4} md={4} lg={4} sx={{ display: "flex", justifyContent: "center", alignItems: "center" }} >
                         <Box
                             sx={{
@@ -159,8 +162,9 @@ const Login = () => {
                             </form> : <CircularProgress />}
                         </Box>
                     </Grid>
-                    <Grid item xs={4} md={4} lg={4}>
-                        <img style={{ width: "100%" }} src={loginImage} alt="" />
+                    <Grid item xs={4} md={4} lg={4}>                    
+                      <img style={{ width: "100%" }} src={loginImage} alt=""/>
+                     
                     </Grid>
                 </Grid>
             </Container>

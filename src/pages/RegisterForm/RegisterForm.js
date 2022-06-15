@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
-import loginImage from "../../images/login.png"
+// import loginImage from "../../images/login.png"
+import loginImage from "../../images/img_vid/login.gif"
 import TextField from '@mui/material/TextField';
 import { Button, Container } from '@mui/material';
 import { Link, NavLink, useNavigate } from 'react-router-dom';
@@ -94,7 +95,7 @@ const RegisterForm = () => {
         }
     }
     return (
-        <Container sx={{ flexGrow: 1, my: 5 }}>
+        <Container sx={{ flexGrow: 1, mt: 5,mb:2 }}>
             <Grid container spacing={2} columns={{ xs: 4, sm: 8, md: 8 }}>
                 <Grid item xs={4} md={4} lg={4} sx={{ display: "flex", justifyContent: "center", alignItems: "center" }} >
                     <Box

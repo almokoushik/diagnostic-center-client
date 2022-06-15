@@ -24,6 +24,12 @@ import Review from './pages/Review/Review/Review';
 import Blog from './pages/Blog/Blog/Blog';
 import Contact from './pages/Contact/Contact/Contact';
 
+
+
+
+
+
+
 function App() {
   return (
     <div className="App">

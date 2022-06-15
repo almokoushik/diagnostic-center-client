@@ -178,7 +178,7 @@ const useFirebase = () => {
                 //console.log("setting auth error :",authError)
                 console.log(error)
             })
-            .finally(() => setLoading(false));;
+            .finally(() => setLoading(false));
     }
     const saveUserToDatabase = async (email, name) => {
         const data = { name: name, email: email }

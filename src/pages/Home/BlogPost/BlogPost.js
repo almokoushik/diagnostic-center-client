@@ -1,55 +1,38 @@
 import React from 'react';
-import Card from '@mui/material/Card';
-import CardHeader from '@mui/material/CardHeader';
-import CardContent from '@mui/material/CardContent';
-import CardActions from '@mui/material/CardActions';
-import Avatar from '@mui/material/Avatar';
-import IconButton from '@mui/material/IconButton';
-import Typography from '@mui/material/Typography';
-import FavoriteIcon from '@mui/icons-material/Favorite';
-import ShareIcon from '@mui/icons-material/Share';
-import MoreVertIcon from '@mui/icons-material/MoreVert';
-import doctorAvatar from "../../../images/people-1.png"
-import { Button } from '@mui/material';
+import { styled } from '@mui/material/styles';
+import Grid from '@mui/material/Grid';
+import Paper from '@mui/material/Paper';
+import Box from '@mui/material/Box';
+
+import SingleBlogPost from "../SingleBlogPost/SingleBlogPost"
+
+const Item = styled(Paper)(({ theme }) => ({
+    backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
+    ...theme.typography.body2,
+    padding: theme.spacing(1),
+    textAlign: 'center',
+    color: theme.palette.text.secondary,
+}));
 
 
-const BlogPost = () => {   
+const BlogPost = ({ post }) => {
+
     return (
-        <Card sx={{ maxWidth: 480 }}>
-            <CardHeader
-                avatar={
-                    <Avatar sx={{}} aria-label="recipe">
-                        <img style={{width:"100%"}} src={doctorAvatar} alt="" />
-                    </Avatar>
-                }
-                action={
-                    <IconButton aria-label="settings">
-                        <MoreVertIcon />
-                    </IconButton>
-                }
-                title="Shrimp and Chorizo Paella"
-                subheader="September 14, 2016"
-            />
-            <CardContent>
-
-            <Typography variant="h6" textAlign="start" style={{marginBottom:"5px"}}>
-                    2 Times brush in a day can keep you healthy
-                </Typography>
-
-                <Typography variant="body2" color="text.secondary" style={{textAlign:"start"}}>
-                   Lorem ipsum dolor sit amet consectetur adipisicing elit. Placeat nostrum sunt quae eaque corrupti itaque sint voluptas laboriosam explicabo hic!
-                </Typography>
-            </CardContent>
-            <CardActions disableSpacing>
-                <IconButton aria-label="add to favorites">
-                    <FavoriteIcon />
-                </IconButton>
-                <IconButton aria-label="share">
-                    <ShareIcon />
-                </IconButton>
-               <Button sx={{marginLeft:"auto",color:"#1dc0c9"}}>Learn More</Button>
-            </CardActions>
-        </Card>
+        <Box sx={{ flexGrow: 1,mb:10 }}>
+            <Grid container rowSpacing={1} columnSpacing={{ xs: 1 }} columns={{ xs: 12, sm: 12, md: 12 }}>
+                <Grid item xs={12} sm={12} md={12} >
+                    <SingleBlogPost post={post} key={post}></SingleBlogPost>
+                    <SingleBlogPost post={post+1} key={post+1}></SingleBlogPost>
+                </Grid>
+                {/* {
+             blogItems.slice(post-1,1).map((blogItem)=>{
+                 return (
+                    
+                 )
+             })
+         } */}
+            </Grid>
+        </Box>
     );
 };
 

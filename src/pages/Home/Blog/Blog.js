@@ -1,43 +1,81 @@
-import React from 'react';
-import { styled } from '@mui/material/styles';
-import Grid from '@mui/material/Grid';
-import Paper from '@mui/material/Paper';
+import React, { useRef, useState } from 'react';
+import { experimentalStyled as styled } from '@mui/material/styles';
 import Box from '@mui/material/Box';
-import { Container, Typography } from '@mui/material';
-import SingleDoctor from '../SingleDoctor/SingleDoctor';
+import Paper from '@mui/material/Paper';
+import Grid from '@mui/material/Grid';
+import { blogItems } from "./blogItem"
+// Import Swiper React components
+import { Swiper, SwiperSlide } from "swiper/react";
+
+
+
+
+
+// import required modules
+import { Pagination } from "swiper";
 import BlogPost from '../BlogPost/BlogPost';
-import FirstBlogPost from '../FirstBlogPost/FirstBlogPost';
 
 const Item = styled(Paper)(({ theme }) => ({
     backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
     ...theme.typography.body2,
-    padding: theme.spacing(1),
+    padding: theme.spacing(2),
     textAlign: 'center',
     color: theme.palette.text.secondary,
 }));
 
 const Blog = () => {
     return (
-        <Container sx={{ width: '100%', margin: "70px auto" }}>
-            <Typography gutterBottom variant="h6" sx={{ color: "#1dc0c9", my: 5, fontWeight: "400px" }} component="div">
-                Our Blog
-            </Typography>
-            <Typography gutterBottom variant="h4" sx={{ fontWeight: "500",mb:5 }} component="div">
-                From Our Blog News
-            </Typography>
-            <Grid container rowSpacing={5} columnSpacing={{ xs: 1, sm: 2, md: 3 }} columns={{ xs: 4, sm: 8, md: 12 }}>
-                <Grid item xs={4} sm={4} md={4} >
-                   <FirstBlogPost></FirstBlogPost>
-                </Grid>
-                <Grid item xs={4} sm={4} md={4}>
-                   <BlogPost></BlogPost>
-                </Grid>
-                <Grid item xs={4} sm={4} md={4}>
-                <BlogPost></BlogPost>
-                </Grid>
+        <Box style={{width:"90%",marginLeft:"auto",marginRight:"auto"}}>
+            <Swiper
+                slidesPerView={2}
+                spaceBetween={10}
+                pagination={{
+                    clickable: true
+                }}
+                breakpoints={{
+                    "@0.00": {
+                        slidesPerView: 1,
+                        spaceBetween: 10
+                    },
+                    "@0.75": {
+                        slidesPerView: 1,
+                        spaceBetween: 10
+                    },
+                    "@1.00": {
+                        slidesPerView: 2,
+                        spaceBetween: 10
+                    },
+                    "@1.50": {
+                        slidesPerView: 2,
+                        spaceBetween: 10
+                    }
+                }}
+                modules={[Pagination]}
+                className="mySwiper"
+            >
 
-            </Grid>
-        </Container>
+                <SwiperSlide>
+                    <BlogPost post={1}></BlogPost>
+                </SwiperSlide>
+                <SwiperSlide>
+                    <BlogPost post={3}></BlogPost>
+                </SwiperSlide>
+                <SwiperSlide>
+                    <BlogPost post={5}></BlogPost>
+                </SwiperSlide>
+                <SwiperSlide>
+                    <BlogPost post={7}></BlogPost>
+                </SwiperSlide>
+                <SwiperSlide>
+                    <BlogPost post={9}></BlogPost>
+                </SwiperSlide>
+                <SwiperSlide>
+                    <BlogPost post={11}></BlogPost>
+                </SwiperSlide>
+
+
+            </Swiper>
+        </Box>
     );
 };
 
