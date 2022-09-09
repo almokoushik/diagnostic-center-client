@@ -1,38 +1,60 @@
-import React from 'react';
-import Box from '@mui/material/Box';
-import Paper from '@mui/material/Paper';
+import React from "react";
+import Box from "@mui/material/Box";
+import Paper from "@mui/material/Paper";
 const ServiceCard = ({ service }) => {
     const { title, bgImage, description } = service;
     return (
         <Box
             sx={{
-                display: 'flex',
-                flexWrap: 'wrap',
-                '& > :not(style)': {
-                    '&:hover': {
-                        background: '#C7F2FF',
-                        cursor: 'pointer',
-
-
+                display: "flex",
+                flexWrap: "wrap",
+                "& > :not(style)": {
+                    background: "#BFD2F8",
+                    "&:hover": {
+                        // background: "#F8FBFF",
+                        cursor: "pointer",
                     },
 
                     width: 1,
-                    padding: 5,
-
+                    pt: 2,
+                    color: "#1F2B6C",
                 },
-
-
-
             }}
-
         >
-            <Paper elevation={1} style={{ transitionDelay: "1s", transitionProperty: "backgroundColor" }}>
-                <Box style={{ display: "flex", justifyContent: "center", alignItems: "center" }}>
-                    <Box style={{ display: "flex", justifyContent: "center", alignItems: "center", height: "100px", width: "100px", borderRadius: "50%", backgroundColor: "#F3FCFF" }}>  <img src={require(`../../images/img_vid/${bgImage}`)} alt="" style={{ width: "50%" }} /></Box>
+            <Paper
+                elevation={0}
+                style={{
+                    transitionDelay: "1s",
+                    transitionProperty: "backgroundColor",
+                }}
+            >
+                <Box
+                    style={{
+                        display: "flex",
+                        justifyContent: "center",
+                        alignItems: "center",
+                    }}
+                >
+                    <Box
+                        style={{
+                            display: "flex",
+                            justifyContent: "center",
+                            alignItems: "center",
+                            height: "50px",
+                            width: "50px",
+                            borderRadius: "50%",
+                        }}
+                    >
+                        <img
+                            src={require(`../../images/img_vid/${bgImage}`)}
+                            alt=""
+                            style={{ width: "100%" }}
+                        />
+                    </Box>
                 </Box>
-                <Box >
-                    <h2>{title}</h2>
-                    <p style={{ fontSize: "18px" }}>{description}</p>
+                <Box>
+                    <h3>{title}</h3>
+                    {/* <p style={{ fontSize: "18px" }}>{description}</p> */}
                 </Box>
             </Paper>
         </Box>

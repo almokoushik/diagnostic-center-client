@@ -1,178 +1,200 @@
-import React, { useState } from 'react';
-import SpecialityCard from './SpecialityCard';
-import { experimentalStyled as styled } from '@mui/material/styles';
-import Box from '@mui/material/Box';
-import Paper from '@mui/material/Paper';
-import Grid from '@mui/material/Grid';
-
-
+import React, { useState } from "react";
+import SpecialityCard from "./SpecialityCard";
+import { experimentalStyled as styled } from "@mui/material/styles";
+import Box from "@mui/material/Box";
+import Paper from "@mui/material/Paper";
+import Grid from "@mui/material/Grid";
 
 const specialities = [
     {
         title: "Plastic Surgery",
-        image: "plasticSurgery.png"
+        image: "plasticSurgery.png",
     },
     {
         title: "Rheumatalogy",
-        image: "rheumatalogy.png"
+        image: "rheumatalogy.png",
     },
     {
         title: "Andrology",
-        image: "andrology.png"
+        image: "andrology.png",
     },
     {
         title: "Bacterology",
-        image: "bacteriology.png"
+        image: "bacteriology.png",
     },
     {
         title: "Virology",
-        image: "virology.png"
+        image: "virology.png",
     },
     {
         title: "Renal Medicine",
-        image: "renal.png"
+        image: "renal.png",
     },
     {
         title: "Orthopedic",
-        image: "orthopedic.png"
+        image: "orthopedic.png",
     },
     {
         title: "Cardiovascular",
-        image: "cardio.png"
+        image: "cardio.png",
     },
     {
         title: "Teeth Orthodontics",
-        image: "teethOrthodontics.png"
+        image: "teethOrthodontics.png",
     },
     {
         title: "Neurology",
-        image: "Neurology.png"
+        image: "Neurology.png",
     },
     {
         title: "Cancer",
-        image: "cancer.png"
-    }, {
+        image: "cancer.png",
+    },
+    {
         title: "Eye Treatment",
-        image: "eye.png"
+        image: "eye.png",
     },
     {
         title: "Palmonary Diseases",
-        image: "lungs.png"
+        image: "lungs.png",
     },
     {
         title: "Respiratory Diseases",
-        image: "abdomen.png"
+        image: "abdomen.png",
     },
     {
         title: "Urology",
-        image: "urlology.png"
+        image: "urlology.png",
     },
     {
         title: "Reproduction",
-        image: "reproduction.png"
+        image: "reproduction.png",
     },
     {
         title: "Auditory",
-        image: "ear.png"
-    }, {
+        image: "ear.png",
+    },
+    {
         title: "Bio Medicine",
-        image: "biomedicine.png"
+        image: "biomedicine.png",
     },
     {
         title: "Endocryinology",
-        image: "endocryine.png"
+        image: "endocryine.png",
     },
     {
         title: "Immunelogy",
-        image: "immunesystem.png"
+        image: "immunesystem.png",
     },
     {
         title: "Pediatric",
-        image: "pedictric.png"
+        image: "pedictric.png",
     },
     {
         title: "Neuro Sergeon",
-        image: "neurosergeon.png"
+        image: "neurosergeon.png",
     },
     {
         title: "Neuclear Medicine ",
-        image: "atomicmedicine.png"
-    }, {
+        image: "atomicmedicine.png",
+    },
+    {
         title: "Neutrition",
-        image: "neutrition.png"
+        image: "neutrition.png",
     },
     {
         title: "Pchycology",
-        image: "pchyciarti.png"
+        image: "pchyciarti.png",
     },
     {
         title: "Radiology",
-        image: "radio.png"
-    }, {
+        image: "radio.png",
+    },
+    {
         title: "Rhinology",
-        image: "rhinology.png"
+        image: "rhinology.png",
     },
     {
         title: "Speech Therapy",
-        image: "speechtherapy.png"
+        image: "speechtherapy.png",
     },
     {
         title: "Surgery",
-        image: "surgery.png"
+        image: "surgery.png",
     },
     {
         title: "Therapy",
-        image: "therapy.png"
+        image: "therapy.png",
     },
     {
         title: "Mother Care",
-        image: "mothercare.png"
-    }, {
+        image: "mothercare.png",
+    },
+    {
         title: "Toxilogy",
-        image: "toxilogy.png"
+        image: "toxilogy.png",
     },
     {
         title: "Hair Treatment",
-        image: "hair.png"
+        image: "hair.png",
     },
     {
         title: "Pathology",
-        image: "pathology.png"
+        image: "pathology.png",
     },
     {
         title: "Angiology",
-        image: "angiology.png"
+        image: "angiology.png",
     },
     {
         title: "Virology",
-        image: "virology.png"
-    }
-
-]
+        image: "virology.png",
+    },
+];
 
 const Speciality = () => {
-    const [data, setData] = useState(12)
+    const [data, setData] = useState(12);
     return (
         <Box sx={{ flexGrow: 1 }} style={{ width: "90%", margin: " 8% auto" }}>
             <Box sx={{ mb: 5 }}>
-                <h3 style={{ color: "#34C9B6" }}>ALWAYS CARING</h3>
-                <h1>Our Specialties</h1>
+                <h2 style={{ color: "#159EEC" }}>ALWAYS CARING</h2>
+                <h1>OUR SPECIALITY AND SECTORS</h1>
             </Box>
-            <Grid container rowSpacing={0} columnSpacing={{ xs: 0 }} columns={{ xs: 12, sm: 12, md: 12 }}>
-                {
-                    specialities.slice(0, data).map((speciality, index) => {
-                        return (
-                            <Grid item xs={6} sm={4} md={2}>
-                                <SpecialityCard speciality={speciality} key={index}></SpecialityCard>
-                            </Grid>
-                        )
-                    })
-                }
-
+            <Grid
+                container
+                rowSpacing={0}
+                columnSpacing={{ xs: 0 }}
+                columns={{ xs: 12, sm: 12, md: 12 }}
+            >
+                {specialities.slice(0, data).map((speciality, index) => {
+                    return (
+                        <Grid item xs={6} sm={4} md={2}>
+                            <SpecialityCard
+                                speciality={speciality}
+                                key={index}
+                            ></SpecialityCard>
+                        </Grid>
+                    );
+                })}
             </Grid>
-            {
-                data < specialities.length && <button style={{ border: "none", width: "100%", backgroundColor: "#34C9B6", color: "white", padding: "10px 0px", fontSize: "20px", fontWeight: "700", marginTop: "30px" }} onClick={() => setData(data + data)}>Load More</button>
-            }
+            {data < specialities.length && (
+                <button
+                    style={{
+                        border: "none",
+                        width: "100%",
+                        backgroundColor: "#BFD2F8",
+                        color: "#1F2B6C",
+                        padding: "10px 0px",
+                        fontSize: "20px",
+                        fontWeight: "700",
+                        marginTop: "30px",
+                        cursor: "pointer",
+                    }}
+                    onClick={() => setData(data + data)}
+                >
+                    Load More
+                </button>
+            )}
         </Box>
     );
 };
