@@ -36,381 +36,400 @@ import LockOpenIcon from "@mui/icons-material/LockOpen";
 const drawerWidth = 240;
 
 export default function Navigation(props: Props) {
-  const [anchorElNav, setAnchorElNav] = React.useState(null);
-  const [anchorElUser, setAnchorElUser] = React.useState(null);
+    const [anchorElNav, setAnchorElNav] = React.useState(null);
+    const [anchorElUser, setAnchorElUser] = React.useState(null);
 
-  const handleOpenNavMenu = (event) => {
-    setAnchorElNav(event.currentTarget);
-  };
-  const handleOpenUserMenu = (event) => {
-    setAnchorElUser(event.currentTarget);
-  };
+    const handleOpenNavMenu = (event) => {
+        setAnchorElNav(event.currentTarget);
+    };
+    const handleOpenUserMenu = (event) => {
+        setAnchorElUser(event.currentTarget);
+    };
 
-  const handleCloseNavMenu = () => {
-    setAnchorElNav(null);
-  };
+    const handleCloseNavMenu = () => {
+        setAnchorElNav(null);
+    };
 
-  const handleCloseUserMenu = () => {
-    setAnchorElUser(null);
-  };
+    const handleCloseUserMenu = () => {
+        setAnchorElUser(null);
+    };
 
-  const { user, loginUser, logoutUser, loading } = useAuth();
+    const { user, loginUser, logoutUser, loading } = useAuth();
 
-  const navButton = {
-    textDecoration: "none",
-    color: "white",
-    fontSize: 22,
-    margin: "0 10px",
-  };
-  const handleLogout = (e) => {
-    e.preventDefault();
-    handleCloseUserMenu();
-    logoutUser();
-  };
+    const navButton = {
+        textDecoration: "none",
+        color: "white",
+        fontSize: 22,
+        margin: "0 10px",
+    };
+    const handleLogout = (e) => {
+        e.preventDefault();
+        handleCloseUserMenu();
+        logoutUser();
+    };
 
-  const { window } = props;
-  const [mobileOpen, setMobileOpen] = React.useState(false);
+    const { window } = props;
+    const [mobileOpen, setMobileOpen] = React.useState(false);
 
-  const handleDrawerToggle = () => {
-    setMobileOpen(!mobileOpen);
-  };
+    const handleDrawerToggle = () => {
+        setMobileOpen(!mobileOpen);
+    };
 
-  const menuItems = [
-    {
-      name: "Home",
-      path: "/",
-      icon: <HomeIcon></HomeIcon>,
-    },
-    {
-      name: "About",
-      path: "/about",
-      icon: <InfoIcon></InfoIcon>,
-    },
-    {
-      name: "Services",
-      path: "/services",
-      icon: <MiscellaneousServicesIcon></MiscellaneousServicesIcon>,
-    },
-    {
-      name: "Reviews",
-      path: "/review",
-      icon: <PreviewIcon></PreviewIcon>,
-    },
-    {
-      name: "Blog",
-      path: "/blog",
-      icon: <AssignmentIcon></AssignmentIcon>,
-    },
-    {
-      name: "Contact Us",
-      path: "/contact",
-      icon: <PermContactCalendarIcon></PermContactCalendarIcon>,
-    },
-    {
-      name: "Appointment",
-      path: "/appointment",
-      icon: <MedicationIcon></MedicationIcon>,
-    },
-  ];
+    const menuItems = [
+        {
+            name: "Home",
+            path: "/",
+            icon: <HomeIcon></HomeIcon>,
+        },
+        {
+            name: "About",
+            path: "/about",
+            icon: <InfoIcon></InfoIcon>,
+        },
+        {
+            name: "Services",
+            path: "/services",
+            icon: <MiscellaneousServicesIcon></MiscellaneousServicesIcon>,
+        },
+        {
+            name: "Reviews",
+            path: "/review",
+            icon: <PreviewIcon></PreviewIcon>,
+        },
+        {
+            name: "Blog",
+            path: "/blog",
+            icon: <AssignmentIcon></AssignmentIcon>,
+        },
+        {
+            name: "About Us",
+            path: "/about",
+            icon: <PermContactCalendarIcon></PermContactCalendarIcon>,
+        },
+        {
+            name: "Appointment",
+            path: "/appointment",
+            icon: <MedicationIcon></MedicationIcon>,
+        },
+    ];
 
-  const menuItemLoggedIn = [
-    {
-      name: "Profile",
-      path: "/profile",
-      icon: <ManageAccountsIcon></ManageAccountsIcon>,
-    },
-    {
-      name: "Dashboard",
-      path: "/dashboard",
-      icon: <GridViewIcon></GridViewIcon>,
-    },
-    {
-      name: "Logout",
-      path: "/",
-      icon: <LogoutIcon></LogoutIcon>,
-    },
-  ];
+    const menuItemLoggedIn = [
+        {
+            name: "Profile",
+            path: "/profile",
+            icon: <ManageAccountsIcon></ManageAccountsIcon>,
+        },
+        {
+            name: "Dashboard",
+            path: "/dashboard",
+            icon: <GridViewIcon></GridViewIcon>,
+        },
+        {
+            name: "Logout",
+            path: "/",
+            icon: <LogoutIcon></LogoutIcon>,
+        },
+    ];
 
-  const drawer = (
-    <div>
-      {/* <Toolbar /> */}
-      <Typography variant="h5" gutterBottom sx={{ pl: 2, pt: 5 }}>
-        Diagnostic Center
-      </Typography>
-      {/* <Toolbar /> */}
-
-      <Divider />
-
-      <List>
-        {menuItems.map((text, index) => (
-          <Link
-            key={index}
-            to={`${text.path}`}
-            style={{
-              display: "flex",
-              justifyContent: "start",
-              margin: "10px",
-              textDecoration: "none",
-              color: "black",
-              fontSize: "40px",
-              alignItems: "center",
-            }}
-          >
-            {text.icon}
-
-            <ListItemText sx={{ ml: 5 }} primary={text.name} />
-          </Link>
-        ))}
-      </List>
-      <Divider />
-
-      <List>
-        {user.email ? (
-          menuItemLoggedIn.map((text, index) => (
-            <NavLink
-              style={{
-                display: "flex",
-                justifyContent: "start",
-                margin: "10px",
-                fontSize: "40px",
-                textDecoration: "none",
-                color: "black",
-                alignItems: "center",
-              }}
-              onClick={text.name === "Logout" && handleLogout}
-              button
-              key={index}
-              to={`${text.path}`}
-            >
-              {text.icon}
-
-              <ListItemText sx={{ ml: 5 }} primary={text.name} />
-            </NavLink>
-          ))
-        ) : (
-          <Link
-            button
-            to={"/login"}
-            style={{
-              display: "flex",
-              fontSize: "40px",
-              justifyContent: "center",
-              margin: "10px",
-              textDecoration: "none",
-              color: "black",
-              alignItems: "center",
-            }}
-          >
-            <LockOpenIcon></LockOpenIcon>
-
-            <ListItemText sx={{ ml: 5 }} primary={"Login"} />
-          </Link>
-        )}
-      </List>
-    </div>
-  );
-
-  const container =
-    window !== undefined ? () => window().document.body : undefined;
-
-  return (
-    <Box sx={{ display: "flex" }}>
-      <CssBaseline />
-      <AppBar
-        position="fixed"
-        sx={{
-          width: "100%",
-          backgroundColor: "#1F2B6C",
-          boxShadow: "none",
-        }}
-      >
-        <Toolbar
-          sx={{
-            width: "100%",
-            py: 3,
-          }}
-        >
-          <IconButton
-            color="inherit"
-            aria-label="open drawer"
-            edge="start"
-            onClick={handleDrawerToggle}
-            sx={{ mx: 0, display: { md: "none" } }}
-          >
-            <MenuIcon />
-          </IconButton>
-
-          <Box
-            sx={{
-              px: "5%",
-              width: "100%",
-              display: "flex",
-              justifyContent: "space-between",
-            }}
-          >
-            <Typography variant="h5" noWrap component="div">
-              Diagnostic Center
+    const drawer = (
+        <div>
+            {/* <Toolbar /> */}
+            <Typography variant="h5" gutterBottom sx={{ pl: 2, pt: 5 }}>
+                Diagnostic Center
             </Typography>
+            {/* <Toolbar /> */}
 
-            <Box
-              transformOrigin={{
-                vertical: "top",
-                horizontal: "right",
-              }}
-              sx={{ display: { xs: "none", md: "block" } }}
-            >
-              <Link to="/home" style={navButton}>
-                Home
-              </Link>
+            <Divider />
 
-              <Link to="/doctors" style={navButton}>
-                Doctors
-              </Link>
-
-              <Link to="/services" style={navButton}>
-                Services
-              </Link>
-
-              <Link to="/review" style={navButton}>
-                Reviews
-              </Link>
-
-              <Link to="/blog" style={navButton}>
-                Blog
-              </Link>
-
-              <Link to="/contact" style={navButton}>
-                Contact Us
-              </Link>
-
-              <Link to="/appointment" style={navButton}>
-                Appointment
-              </Link>
-
-              {user?.email ? (
-                <>
-                  <Tooltip title="Open settings">
-                    <IconButton
-                      color="inherit"
-                      onClick={handleOpenUserMenu}
-                      sx={{
-                        p: 0,
-                        mx: 3,
-                        overflow: "hidden",
-                      }}
+            <List>
+                {menuItems.map((text, index) => (
+                    <Link
+                        key={index}
+                        to={`${text.path}`}
+                        style={{
+                            display: "flex",
+                            justifyContent: "start",
+                            margin: "10px",
+                            textDecoration: "none",
+                            color: "black",
+                            fontSize: "40px",
+                            alignItems: "center",
+                        }}
                     >
-                      <Avatar
-                        style={{ fontSize: "24px" }}
-                        alt="Remy Sharp"
-                        src={avaPic}
-                      />
+                        {text.icon}
+
+                        <ListItemText sx={{ ml: 5 }} primary={text.name} />
+                    </Link>
+                ))}
+            </List>
+            <Divider />
+
+            <List>
+                {user.email ? (
+                    menuItemLoggedIn.map((text, index) => (
+                        <NavLink
+                            style={{
+                                display: "flex",
+                                justifyContent: "start",
+                                margin: "10px",
+                                fontSize: "40px",
+                                textDecoration: "none",
+                                color: "black",
+                                alignItems: "center",
+                            }}
+                            onClick={text.name === "Logout" && handleLogout}
+                            button
+                            key={index}
+                            to={`${text.path}`}
+                        >
+                            {text.icon}
+
+                            <ListItemText sx={{ ml: 5 }} primary={text.name} />
+                        </NavLink>
+                    ))
+                ) : (
+                    <Link
+                        button
+                        to={"/login"}
+                        style={{
+                            display: "flex",
+                            fontSize: "40px",
+                            justifyContent: "center",
+                            margin: "10px",
+                            textDecoration: "none",
+                            color: "black",
+                            alignItems: "center",
+                        }}
+                    >
+                        <LockOpenIcon></LockOpenIcon>
+
+                        <ListItemText sx={{ ml: 5 }} primary={"Login"} />
+                    </Link>
+                )}
+            </List>
+        </div>
+    );
+
+    const container =
+        window !== undefined ? () => window().document.body : undefined;
+
+    return (
+        <Box sx={{ display: "flex" }}>
+            <CssBaseline />
+            <AppBar
+                position="fixed"
+                sx={{
+                    width: "100%",
+                    backgroundColor: "#1F2B6C",
+                    boxShadow: "none",
+                }}
+            >
+                <Toolbar
+                    sx={{
+                        width: "100%",
+                        py: 3,
+                    }}
+                >
+                    <IconButton
+                        color="inherit"
+                        aria-label="open drawer"
+                        edge="start"
+                        onClick={handleDrawerToggle}
+                        sx={{ mx: 0, display: { md: "none" } }}
+                    >
+                        <MenuIcon />
                     </IconButton>
-                  </Tooltip>
-                  <Menu
-                    sx={{ mt: "45px" }}
-                    id="menu-appbar"
-                    anchorEl={anchorElUser}
-                    anchorOrigin={{
-                      vertical: "top",
-                      horizontal: "right",
-                    }}
-                    keepMounted
-                    transformOrigin={{
-                      vertical: "top",
-                      horizontal: "right",
-                    }}
-                    open={Boolean(anchorElUser)}
-                    onClose={handleCloseUserMenu}
-                  >
-                    <Box sx={{ width: "350px" }}>
-                      <Link to="/profile" style={navButton}>
-                        {" "}
-                        <MenuItem
-                          sx={{ color: "black", fontWeight: "450" }}
-                          onClick={handleCloseUserMenu}
-                        >
-                          Profile
-                        </MenuItem>
-                      </Link>
 
-                      <Link to="/dashboard" style={navButton}>
-                        {" "}
-                        <MenuItem
-                          sx={{ color: "black", fontWeight: "450" }}
-                          onClick={handleCloseUserMenu}
-                        >
-                          Dashboard
-                        </MenuItem>
-                      </Link>
+                    <Box
+                        sx={{
+                            px: "5%",
+                            width: "100%",
+                            display: "flex",
+                            justifyContent: "space-between",
+                        }}
+                    >
+                        <Typography variant="h5" noWrap component="div">
+                            Diagnostic Center
+                        </Typography>
 
-                      <Link to="/" style={navButton}>
-                        <MenuItem
-                          sx={{ color: "black", fontWeight: "450" }}
-                          onClick={handleLogout}
+                        <Box
+                            transformOrigin={{
+                                vertical: "top",
+                                horizontal: "right",
+                            }}
+                            sx={{ display: { xs: "none", md: "block" } }}
                         >
-                          Logout
-                        </MenuItem>
-                      </Link>
+                            <Link to="/home" style={navButton}>
+                                Home
+                            </Link>
+
+                            <Link to="/doctors" style={navButton}>
+                                Doctors
+                            </Link>
+
+                            <Link to="/services" style={navButton}>
+                                Services
+                            </Link>
+
+                            <Link to="/review" style={navButton}>
+                                Reviews
+                            </Link>
+
+                            <Link to="/blog" style={navButton}>
+                                Blog
+                            </Link>
+
+                            <Link to="/about" style={navButton}>
+                                About Us
+                            </Link>
+
+                            <Link to="/appointment" style={navButton}>
+                                Appointment
+                            </Link>
+
+                            {user?.email ? (
+                                <>
+                                    <Tooltip title="Open settings">
+                                        <IconButton
+                                            color="inherit"
+                                            onClick={handleOpenUserMenu}
+                                            sx={{
+                                                p: 0,
+                                                mx: 3,
+                                                overflow: "hidden",
+                                            }}
+                                        >
+                                            <Avatar
+                                                style={{ fontSize: "24px" }}
+                                                alt="Remy Sharp"
+                                                src={avaPic}
+                                            />
+                                        </IconButton>
+                                    </Tooltip>
+                                    <Menu
+                                        sx={{ mt: "45px" }}
+                                        id="menu-appbar"
+                                        anchorEl={anchorElUser}
+                                        anchorOrigin={{
+                                            vertical: "top",
+                                            horizontal: "right",
+                                        }}
+                                        keepMounted
+                                        transformOrigin={{
+                                            vertical: "top",
+                                            horizontal: "right",
+                                        }}
+                                        open={Boolean(anchorElUser)}
+                                        onClose={handleCloseUserMenu}
+                                    >
+                                        <Box sx={{ width: "350px" }}>
+                                            <Link
+                                                to="/profile"
+                                                style={navButton}
+                                            >
+                                                {" "}
+                                                <MenuItem
+                                                    sx={{
+                                                        color: "black",
+                                                        fontWeight: "450",
+                                                    }}
+                                                    onClick={
+                                                        handleCloseUserMenu
+                                                    }
+                                                >
+                                                    Profile
+                                                </MenuItem>
+                                            </Link>
+
+                                            <Link
+                                                to="/dashboard"
+                                                style={navButton}
+                                            >
+                                                {" "}
+                                                <MenuItem
+                                                    sx={{
+                                                        color: "black",
+                                                        fontWeight: "450",
+                                                    }}
+                                                    onClick={
+                                                        handleCloseUserMenu
+                                                    }
+                                                >
+                                                    Dashboard
+                                                </MenuItem>
+                                            </Link>
+
+                                            <Link to="/" style={navButton}>
+                                                <MenuItem
+                                                    sx={{
+                                                        color: "black",
+                                                        fontWeight: "450",
+                                                    }}
+                                                    onClick={handleLogout}
+                                                >
+                                                    Logout
+                                                </MenuItem>
+                                            </Link>
+                                        </Box>
+                                    </Menu>
+                                </>
+                            ) : (
+                                <Link to="/login" style={navButton}>
+                                    Login
+                                </Link>
+                            )}
+                        </Box>
                     </Box>
-                  </Menu>
-                </>
-              ) : (
-                <Link to="/login" style={navButton}>
-                  Login
-                </Link>
-              )}
-            </Box>
-          </Box>
-        </Toolbar>
-      </AppBar>
-      <Box
-        component="nav"
-        sx={{ width: { sm: drawerWidth }, flexShrink: { sm: 0 } }}
-        aria-label="mailbox folders"
-      >
-        <Drawer
-          container={container}
-          variant="temporary"
-          open={mobileOpen}
-          onClose={handleDrawerToggle}
-          ModalProps={{
-            keepMounted: true, // Better open performance on mobile.
-          }}
-          sx={{
-            display: { xs: "block", md: "none" },
-            "& .MuiDrawer-paper": {
-              boxSizing: "border-box",
-              width: drawerWidth,
-            },
-          }}
-        >
-          {drawer}
-        </Drawer>
+                </Toolbar>
+            </AppBar>
+            <Box
+                component="nav"
+                sx={{ width: { sm: drawerWidth }, flexShrink: { sm: 0 } }}
+                aria-label="mailbox folders"
+            >
+                <Drawer
+                    container={container}
+                    variant="temporary"
+                    open={mobileOpen}
+                    onClose={handleDrawerToggle}
+                    ModalProps={{
+                        keepMounted: true, // Better open performance on mobile.
+                    }}
+                    sx={{
+                        display: { xs: "block", md: "none" },
+                        "& .MuiDrawer-paper": {
+                            boxSizing: "border-box",
+                            width: drawerWidth,
+                        },
+                    }}
+                >
+                    {drawer}
+                </Drawer>
 
-        <Drawer
-          variant="temporary"
-          sx={{
-            display: { xs: "block", md: "none" },
-            "& .MuiDrawer-paper": {
-              boxSizing: "border-box",
-              width: drawerWidth,
-            },
-          }}
-          close
-        >
-          {drawer}
-        </Drawer>
-      </Box>
-      <Box
-        component="main"
-        sx={{
-          flexGrow: 1,
-          p: 3,
-          width: { sm: `calc(100% - ${drawerWidth}px)` },
-        }}
-      >
-        <Toolbar />
-      </Box>
-    </Box>
-  );
+                <Drawer
+                    variant="temporary"
+                    sx={{
+                        display: { xs: "block", md: "none" },
+                        "& .MuiDrawer-paper": {
+                            boxSizing: "border-box",
+                            width: drawerWidth,
+                        },
+                    }}
+                    close
+                >
+                    {drawer}
+                </Drawer>
+            </Box>
+            <Box
+                component="main"
+                sx={{
+                    flexGrow: 1,
+                    p: 3,
+                    width: { sm: `calc(100% - ${drawerWidth}px)` },
+                }}
+            >
+                <Toolbar />
+            </Box>
+        </Box>
+    );
 }
